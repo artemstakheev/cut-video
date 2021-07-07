@@ -8,28 +8,25 @@ let time_end = 1;
 let crop = [null, null];
 let selected_file = null;
 
-const reader = new FileReader();
-  reader.addEventListener('load', (event) => {
-    selected_file = event.target.result;
-  });
-  var blob = new Blob([JSON.stringify("file:///E:/Workspace/github/web/movie.mp4")]);
-  reader.readAsDataURL(blob);
-
 $(() => {
 	console.log('Loaded DOM.');
 
-	// $("#video_selector").change(function (e) {
-	// 	let fileInput = e.target;
-	// 	let fileUrl = window.URL.createObjectURL(fileInput.files[0]);
-	// 	filename = fileInput.files[0].name;
-	// 	selected_file = fileInput.files[0];
-	// 	console.log(fileInput.files[0]);
-	// });
+	$("#video_selector").change(function (e) {
+		let fileInput = e.target;
+		let fileUrl = window.URL.createObjectURL(fileInput.files[0]);
+		filename = fileInput.files[0].name;
+		selected_file = fileInput.files[0];
+		$(".video").attr("src", fileUrl);
+		e.target.remove();
+	});
 	$("#mute_toggle").click(function (){
 		$(video).prop('muted', !$(video).prop('muted'));
 	});
 
 	$(".video").bind("loadedmetadata", function (e) {
+	    console.log(this.videoWidth);
+	    console.log(this.videoHeight);
+	    console.log(this.duration);
         time_end = this.duration;
         $("#slide_end").val(this.duration);
         $("#slide_end").attr("max", this.duration);
@@ -122,7 +119,6 @@ $("#run_ffmpeg").click(async () => {
 		a.download = fn;
 		let blob = new Blob([data.buffer], {type: 'video/mp4'});
 		a.href = window.URL.createObjectURL(blob);
-		a.textContent = 'Click here to download [' + fn + "]!";
 
 		document.querySelector(".download_links").append(a);
 		a.click();

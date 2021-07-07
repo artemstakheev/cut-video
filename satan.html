@@ -4,20 +4,21 @@
 	<meta charset="UTF-8">
 	<title>Editor</title>
 	<script
-		src="https://code.jquery.com/jquery-3.3.1.min.js">
+		src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+		crossorigin="anonymous">
 	</script>
 	<link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
 <div id="resizable" class="ui-widget-content">
-	<video class="video" src="file:///E:/Workspace/github/web/movie.mp4" loop muted></video>
-	<!-- <video class="video" loop muted></video> -->
+	<video class="video" loop muted></video>
 	<canvas id="canv"></canvas>
 </div>
 
-<!-- <input type="file" id="video_selector" accept=".mkv,video/*"/> -->
-<div class="hide_until_load">
+<input type="file" id="video_selector" accept=".mkv,video/*"/>
+<div class="hide_until_load hidden">
 	<span class="current_time"></span>
 	<div class="slider_wrapper">
 		<div id="slider"></div>
@@ -29,9 +30,9 @@
 	<button class='play_toggle' onClick="pause_toggle()">&#10074;&#10074;</button>
 	<label for="mute_toggle">Mute:</label><input type="checkbox" id="mute_toggle" checked />
 
-	<!-- <div class="ffmpeg" onclick="copyText()" title="Click here to copy to clipboard.">
+	<div class="ffmpeg" onclick="copyText()" title="Click here to copy to clipboard.">
 		ffmpeg -i in.mp4 -filter:v "crop=80:60:200:100" -c:a copy out.mp4
-	</div> -->
+	</div>
 
 	<input type="button" id="run_ffmpeg" value="Run FFmpeg in-browser!"/>
 
